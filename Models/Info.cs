@@ -1,6 +1,6 @@
-using Library.Data;
+using LibrarieStore.Data;
 
-namespace Library.Models
+namespace LibrarieStore.Models
 {
     public class Info
     {
@@ -11,11 +11,5 @@ namespace Library.Models
         public string? TimeIn { get; set; }
         public string? TimeOut { get; set; }
 
-        //   public ICollection<User> Users { get; }
-        // public ICollection<User>? Users { get; set;} 
-        // can use
-
-        // public int UserId { get; set; }
-        // public User? User { get; set; }
     }
 }

@@ -2,14 +2,14 @@
 
 #nullable disable
 
-namespace Library.Migrations.InfoDbMigrations
+namespace Library.Migrations.CategorieDbMigrations
 {
-    public partial class InfoAdd : Migration
+    public partial class CategorieAdd : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Categorie",
+                name: "AllCategorie",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -19,7 +19,7 @@ namespace Library.Migrations.InfoDbMigrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categorie", x => x.Id);
+                    table.PrimaryKey("PK_AllCategorie", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -31,7 +31,7 @@ namespace Library.Migrations.InfoDbMigrations
                     Code = table.Column<int>(type: "INTEGER", nullable: false),
                     FirstName = table.Column<string>(type: "TEXT", nullable: true),
                     LastName = table.Column<string>(type: "TEXT", nullable: true),
-                    Tel = table.Column<int>(type: "INTEGER", nullable: false),
+                    Tel = table.Column<string>(type: "TEXT", nullable: true),
                     Address = table.Column<string>(type: "TEXT", nullable: true),
                     Email = table.Column<string>(type: "TEXT", nullable: true),
                     Status = table.Column<char>(type: "TEXT", nullable: false)
@@ -57,15 +57,15 @@ namespace Library.Migrations.InfoDbMigrations
                 {
                     table.PrimaryKey("PK_Book", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Book_Categorie_CategorieId",
+                        name: "FK_Book_AllCategorie_CategorieId",
                         column: x => x.CategorieId,
-                        principalTable: "Categorie",
+                        principalTable: "AllCategorie",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Infoss",
+                name: "Info",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -77,9 +77,9 @@ namespace Library.Migrations.InfoDbMigrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Infoss", x => x.Id);
+                    table.PrimaryKey("PK_Info", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Infoss_User_UserId",
+                        name: "FK_Info_User_UserId",
                         column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "Id",
@@ -94,8 +94,8 @@ namespace Library.Migrations.InfoDbMigrations
                         .Annotation("Sqlite:Autoincrement", true),
                     BookId = table.Column<int>(type: "INTEGER", nullable: false),
                     UserId = table.Column<int>(type: "INTEGER", nullable: false),
-                    DatetimeRent = table.Column<int>(type: "INTEGER", nullable: false),
-                    Datetimeback = table.Column<int>(type: "INTEGER", nullable: false),
+                    DatetimeRent = table.Column<string>(type: "TEXT", nullable: true),
+                    Datetimeback = table.Column<string>(type: "TEXT", nullable: true),
                     Return = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -121,8 +121,8 @@ namespace Library.Migrations.InfoDbMigrations
                 column: "CategorieId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Infoss_UserId",
-                table: "Infoss",
+                name: "IX_Info_UserId",
+                table: "Info",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -139,7 +139,7 @@ namespace Library.Migrations.InfoDbMigrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Infoss");
+                name: "Info");
 
             migrationBuilder.DropTable(
                 name: "Rent");
@@ -151,7 +151,7 @@ namespace Library.Migrations.InfoDbMigrations
                 name: "User");
 
             migrationBuilder.DropTable(
-                name: "Categorie");
+                name: "AllCategorie");
         }
     }
 }

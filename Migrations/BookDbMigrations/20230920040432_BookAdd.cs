@@ -2,9 +2,9 @@
 
 #nullable disable
 
-namespace Library.Migrations.UserDbMigrations
+namespace Library.Migrations.BookDbMigrations
 {
-    public partial class UserAdd : Migration
+    public partial class BookAdd : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -23,7 +23,7 @@ namespace Library.Migrations.UserDbMigrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Userss",
+                name: "User",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -31,18 +31,18 @@ namespace Library.Migrations.UserDbMigrations
                     Code = table.Column<int>(type: "INTEGER", nullable: false),
                     FirstName = table.Column<string>(type: "TEXT", nullable: true),
                     LastName = table.Column<string>(type: "TEXT", nullable: true),
-                    Tel = table.Column<int>(type: "INTEGER", nullable: false),
+                    Tel = table.Column<string>(type: "TEXT", nullable: true),
                     Address = table.Column<string>(type: "TEXT", nullable: true),
                     Email = table.Column<string>(type: "TEXT", nullable: true),
                     Status = table.Column<char>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Userss", x => x.Id);
+                    table.PrimaryKey("PK_User", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Book",
+                name: "AllBook",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -55,9 +55,9 @@ namespace Library.Migrations.UserDbMigrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Book", x => x.Id);
+                    table.PrimaryKey("PK_AllBook", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Book_Categorie_CategorieId",
+                        name: "FK_AllBook_Categorie_CategorieId",
                         column: x => x.CategorieId,
                         principalTable: "Categorie",
                         principalColumn: "Id",
@@ -79,9 +79,9 @@ namespace Library.Migrations.UserDbMigrations
                 {
                     table.PrimaryKey("PK_Info", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Info_Userss_UserId",
+                        name: "FK_Info_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Userss",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -94,30 +94,30 @@ namespace Library.Migrations.UserDbMigrations
                         .Annotation("Sqlite:Autoincrement", true),
                     BookId = table.Column<int>(type: "INTEGER", nullable: false),
                     UserId = table.Column<int>(type: "INTEGER", nullable: false),
-                    DatetimeRent = table.Column<int>(type: "INTEGER", nullable: false),
-                    Datetimeback = table.Column<int>(type: "INTEGER", nullable: false),
+                    DatetimeRent = table.Column<string>(type: "TEXT", nullable: true),
+                    Datetimeback = table.Column<string>(type: "TEXT", nullable: true),
                     Return = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Rent", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Rent_Book_BookId",
+                        name: "FK_Rent_AllBook_BookId",
                         column: x => x.BookId,
-                        principalTable: "Book",
+                        principalTable: "AllBook",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Rent_Userss_UserId",
+                        name: "FK_Rent_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Userss",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Book_CategorieId",
-                table: "Book",
+                name: "IX_AllBook_CategorieId",
+                table: "AllBook",
                 column: "CategorieId");
 
             migrationBuilder.CreateIndex(
@@ -145,10 +145,10 @@ namespace Library.Migrations.UserDbMigrations
                 name: "Rent");
 
             migrationBuilder.DropTable(
-                name: "Book");
+                name: "AllBook");
 
             migrationBuilder.DropTable(
-                name: "Userss");
+                name: "User");
 
             migrationBuilder.DropTable(
                 name: "Categorie");

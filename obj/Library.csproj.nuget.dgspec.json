@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/nampoo/PranworksTest/Library/Library.csproj": {}
+    "/Users/nampoo/PranworksTest/PWT/PranworksTest/Library.csproj": {}
   },
   "projects": {
-    "/Users/nampoo/PranworksTest/Library/Library.csproj": {
+    "/Users/nampoo/PranworksTest/PWT/PranworksTest/Library.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/nampoo/PranworksTest/Library/Library.csproj",
+        "projectUniqueName": "/Users/nampoo/PranworksTest/PWT/PranworksTest/Library.csproj",
         "projectName": "Library",
-        "projectPath": "/Users/nampoo/PranworksTest/Library/Library.csproj",
+        "projectPath": "/Users/nampoo/PranworksTest/PWT/PranworksTest/Library.csproj",
         "packagesPath": "/Users/nampoo/.nuget/packages/",
-        "outputPath": "/Users/nampoo/PranworksTest/Library/obj/",
+        "outputPath": "/Users/nampoo/PranworksTest/PWT/PranworksTest/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/nampoo/.nuget/NuGet/NuGet.Config"

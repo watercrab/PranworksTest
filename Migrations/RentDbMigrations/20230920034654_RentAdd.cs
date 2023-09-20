@@ -2,9 +2,9 @@
 
 #nullable disable
 
-namespace Library.Migrations
+namespace Library.Migrations.RentDbMigrations
 {
-    public partial class BookAdd : Migration
+    public partial class RentAdd : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -31,7 +31,7 @@ namespace Library.Migrations
                     Code = table.Column<int>(type: "INTEGER", nullable: false),
                     FirstName = table.Column<string>(type: "TEXT", nullable: true),
                     LastName = table.Column<string>(type: "TEXT", nullable: true),
-                    Tel = table.Column<int>(type: "INTEGER", nullable: false),
+                    Tel = table.Column<string>(type: "TEXT", nullable: true),
                     Address = table.Column<string>(type: "TEXT", nullable: true),
                     Email = table.Column<string>(type: "TEXT", nullable: true),
                     Status = table.Column<char>(type: "TEXT", nullable: false)
@@ -42,7 +42,7 @@ namespace Library.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Bookss",
+                name: "Book",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -55,9 +55,9 @@ namespace Library.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Bookss", x => x.Id);
+                    table.PrimaryKey("PK_Book", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Bookss_Categorie_CategorieId",
+                        name: "FK_Book_Categorie_CategorieId",
                         column: x => x.CategorieId,
                         principalTable: "Categorie",
                         principalColumn: "Id",
@@ -87,28 +87,28 @@ namespace Library.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Rent",
+                name: "AllRent",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     BookId = table.Column<int>(type: "INTEGER", nullable: false),
                     UserId = table.Column<int>(type: "INTEGER", nullable: false),
-                    DatetimeRent = table.Column<int>(type: "INTEGER", nullable: false),
-                    Datetimeback = table.Column<int>(type: "INTEGER", nullable: false),
+                    DatetimeRent = table.Column<string>(type: "TEXT", nullable: true),
+                    Datetimeback = table.Column<string>(type: "TEXT", nullable: true),
                     Return = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Rent", x => x.Id);
+                    table.PrimaryKey("PK_AllRent", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Rent_Bookss_BookId",
+                        name: "FK_AllRent_Book_BookId",
                         column: x => x.BookId,
-                        principalTable: "Bookss",
+                        principalTable: "Book",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Rent_User_UserId",
+                        name: "FK_AllRent_User_UserId",
                         column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "Id",
@@ -116,36 +116,36 @@ namespace Library.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bookss_CategorieId",
-                table: "Bookss",
+                name: "IX_AllRent_BookId",
+                table: "AllRent",
+                column: "BookId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AllRent_UserId",
+                table: "AllRent",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Book_CategorieId",
+                table: "Book",
                 column: "CategorieId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Info_UserId",
                 table: "Info",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Rent_BookId",
-                table: "Rent",
-                column: "BookId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Rent_UserId",
-                table: "Rent",
-                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "AllRent");
+
+            migrationBuilder.DropTable(
                 name: "Info");
 
             migrationBuilder.DropTable(
-                name: "Rent");
-
-            migrationBuilder.DropTable(
-                name: "Bookss");
+                name: "Book");
 
             migrationBuilder.DropTable(
                 name: "User");

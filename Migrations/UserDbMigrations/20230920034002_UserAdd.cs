@@ -2,12 +2,31 @@
 
 #nullable disable
 
-namespace Library.Migrations.RentDbMigrations
+namespace Library.Migrations
 {
-    public partial class RentAdd : Migration
+    public partial class UserAdd : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "AllUser",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Code = table.Column<int>(type: "INTEGER", nullable: false),
+                    FirstName = table.Column<string>(type: "TEXT", nullable: true),
+                    LastName = table.Column<string>(type: "TEXT", nullable: true),
+                    Tel = table.Column<string>(type: "TEXT", nullable: true),
+                    Address = table.Column<string>(type: "TEXT", nullable: true),
+                    Email = table.Column<string>(type: "TEXT", nullable: true),
+                    Status = table.Column<char>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AllUser", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Categorie",
                 columns: table => new
@@ -23,22 +42,25 @@ namespace Library.Migrations.RentDbMigrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Info",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Code = table.Column<int>(type: "INTEGER", nullable: false),
-                    FirstName = table.Column<string>(type: "TEXT", nullable: true),
-                    LastName = table.Column<string>(type: "TEXT", nullable: true),
-                    Tel = table.Column<int>(type: "INTEGER", nullable: false),
-                    Address = table.Column<string>(type: "TEXT", nullable: true),
-                    Email = table.Column<string>(type: "TEXT", nullable: true),
-                    Status = table.Column<char>(type: "TEXT", nullable: false)
+                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Date = table.Column<string>(type: "TEXT", nullable: true),
+                    TimeIn = table.Column<string>(type: "TEXT", nullable: true),
+                    TimeOut = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.PrimaryKey("PK_Info", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Info_AllUser_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AllUser",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -65,52 +87,30 @@ namespace Library.Migrations.RentDbMigrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Info",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Date = table.Column<string>(type: "TEXT", nullable: true),
-                    TimeIn = table.Column<string>(type: "TEXT", nullable: true),
-                    TimeOut = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Info", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Info_User_UserId",
-                        column: x => x.UserId,
-                        principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Rentss",
+                name: "Rent",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     BookId = table.Column<int>(type: "INTEGER", nullable: false),
                     UserId = table.Column<int>(type: "INTEGER", nullable: false),
-                    DatetimeRent = table.Column<int>(type: "INTEGER", nullable: false),
-                    Datetimeback = table.Column<int>(type: "INTEGER", nullable: false),
+                    DatetimeRent = table.Column<string>(type: "TEXT", nullable: true),
+                    Datetimeback = table.Column<string>(type: "TEXT", nullable: true),
                     Return = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Rentss", x => x.Id);
+                    table.PrimaryKey("PK_Rent", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Rentss_Book_BookId",
-                        column: x => x.BookId,
-                        principalTable: "Book",
+                        name: "FK_Rent_AllUser_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AllUser",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Rentss_User_UserId",
-                        column: x => x.UserId,
-                        principalTable: "User",
+                        name: "FK_Rent_Book_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Book",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -126,13 +126,13 @@ namespace Library.Migrations.RentDbMigrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Rentss_BookId",
-                table: "Rentss",
+                name: "IX_Rent_BookId",
+                table: "Rent",
                 column: "BookId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Rentss_UserId",
-                table: "Rentss",
+                name: "IX_Rent_UserId",
+                table: "Rent",
                 column: "UserId");
         }
 
@@ -142,13 +142,13 @@ namespace Library.Migrations.RentDbMigrations
                 name: "Info");
 
             migrationBuilder.DropTable(
-                name: "Rentss");
+                name: "Rent");
+
+            migrationBuilder.DropTable(
+                name: "AllUser");
 
             migrationBuilder.DropTable(
                 name: "Book");
-
-            migrationBuilder.DropTable(
-                name: "User");
 
             migrationBuilder.DropTable(
                 name: "Categorie");

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "z+XUQ+Nd9udUXKiFAl5PbrYEep03v0M0ASeLJUSmjeVGTsXe1VKgA4/vttNxrJMx6lxJSF1xhOL+QecErn5DSg==",
+  "dgSpecHash": "yGMYhOFqm+/ep8Us6NC7tR57Imw2+no03D0NsDYCt31edg7K0JCH5ULu2bH9L0T+no8z62Ck+CPaVQ80+W7j3A==",
   "success": true,
-  "projectFilePath": "/Users/nampoo/PranworksTest/Library/Library.csproj",
+  "projectFilePath": "/Users/nampoo/PranworksTest/PWT/PranworksTest/Library.csproj",
   "expectedPackageFiles": [
     "/Users/nampoo/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
     "/Users/nampoo/.nuget/packages/microsoft.data.sqlite.core/6.0.0/microsoft.data.sqlite.core.6.0.0.nupkg.sha512",
